@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
-
+import ScrollActionGame from "./components/ScrollActionGame";
 function App() {
   const [name, setName] = useState("");
 
@@ -21,6 +21,7 @@ function App() {
   return (
     <div className="App">
       {name && <p>こんにちは、{name}さん</p>}
+      <ScrollActionGame></ScrollActionGame>
     </div>
   );
 }
