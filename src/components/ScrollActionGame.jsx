@@ -75,7 +75,7 @@ const ScrollActionGame = () => {
       liff.shareTargetPicker([
         {
           "type": "flex",
-          "altText": "シューティングゲームのスコアをシェア！",
+          "altText": "ブロック回避ゲームのスコアをシェア！",
           "contents": {
             "type": "bubble",
             "hero": {
@@ -90,12 +90,111 @@ const ScrollActionGame = () => {
               "layout": "vertical",
               "contents": [
                 {
-                  "type": "text",
-                  "text": `シューティングゲームで${score}点をとったよ！`,
-                  "size": "lg",
-                  "color": "#000000",
-                  "weight": "bold",
-                  "wrap": true
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": `ブロック回避ゲームで${score}点をとったよ！`,
+                      "size": "lg",
+                      "color": "#000000",
+                      "weight": "bold",
+                      "wrap": true
+                    }
+                  ],
+                  "spacing": "none"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "text",
+                      "text": "横スクロールのブロック回避ゲーム",
+                      "size": "sm",
+                      "color": "#999999",
+                      "wrap": true
+                    }
+                  ],
+                  "spacing": "none"
+                },
+                {
+                  "type": "box",
+                  "layout": "vertical",
+                  "contents": [
+                    {
+                      "type": "button",
+                      "action": {
+                        "type": "uri",
+                        "label": "遊んでみる！",
+                        "uri": `https://miniapp.line.me/${liff.id}`
+                      },
+                      "style": "primary",
+                      "height": "md",
+                      "color": "#17c950"
+                    },
+                    {
+                      "type": "button",
+                      "action": {
+                        "type": "uri",
+                        "label": "シェアする",
+                        "uri": `https://miniapp.line.me/${liff.id}/share`
+                      },
+                      "style": "link",
+                      "height": "md",
+                      "color": "#469fd6"
+                    }
+                  ],
+                  "spacing": "xs",
+                  "margin": "lg"
+                }
+              ],
+              "spacing": "md"
+            },
+            "footer": {
+              "type": "box",
+              "layout": "vertical",
+              "contents": [
+                {
+                  "type": "separator",
+                  "color": "#f0f0f0"
+                },
+                {
+                  "type": "box",
+                  "layout": "horizontal",
+                  "contents": [
+                    {
+                      "type": "image",
+                      "url": "https://tominaga-tora.github.io/line-mini-app/jump-mini-app-icon.png",
+                      "flex": 1,
+                      "gravity": "center"
+                    },
+                    {
+                      "type": "text",
+                      "text": "障害物ジャンプゲーム",
+                      "flex": 19,
+                      "size": "xs",
+                      "color": "#999999",
+                      "weight": "bold",
+                      "gravity": "center",
+                      "wrap": false
+                    },
+                    {
+                      "type": "image",
+                      "url": "https://vos.line-scdn.net/service-notifier/footer_go_btn.png",
+                      "flex": 1,
+                      "gravity": "center",
+                      "size": "xxs",
+                      "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": `https://miniapp.line.me/${liff.id}`
+                      }
+                    }
+                  ],
+                  "flex": 1,
+                  "spacing": "md",
+                  "margin": "md"
                 }
               ]
             }
@@ -103,15 +202,15 @@ const ScrollActionGame = () => {
         }
       ])
         .then((res) => {
-          if (res) {
+        if (res) {
             setMessage("シェアしました！");
-          } else {
+        } else {
             setMessage("シェアをキャンセルしました。");
-          }
-        })
+        }
+      })
         .catch(() => {
           setMessage("エラーが発生しました。");
-        });
+      });
     }
   };
 
