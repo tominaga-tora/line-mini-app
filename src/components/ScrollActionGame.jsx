@@ -19,6 +19,9 @@ const ScrollActionGame = () => {
   const [isLiffBrowser] = useAtom(isLiffBrowserAtom);
   // シェアやエラーのメッセージを管理するuseState
   const [message, setMessage] = useState("");
+  const env = import.meta.env;
+  const VITE_LIFF_ID = env.VITE_LIFF_ID;
+  const mainImage = "https://tominaga-tora.github.io/line-mini-app/jump-mini-app-icon.png";
 
   // ゲームの設定（キャンバスサイズ、プレイヤーサイズ、障害物サイズ、重力など）
   const config = {
@@ -80,7 +83,7 @@ const ScrollActionGame = () => {
             "type": "bubble",
             "hero": {
               "type": "image",
-              "url": "./jump-mini-app-icon.png",
+              "url": `${mainImage}`,
               "size": "full",
               "aspectRatio": "20:13",
               "aspectMode": "cover"
@@ -127,7 +130,7 @@ const ScrollActionGame = () => {
                       "action": {
                         "type": "uri",
                         "label": "遊んでみる！",
-                        "uri": `https://miniapp.line.me/${liff.id}`
+                        "uri": `https://miniapp.line.me/${VITE_LIFF_ID}`
                       },
                       "style": "primary",
                       "height": "md",
@@ -138,7 +141,7 @@ const ScrollActionGame = () => {
                       "action": {
                         "type": "uri",
                         "label": "シェアする",
-                        "uri": `https://miniapp.line.me/${liff.id}/share`
+                        "uri": `https://miniapp.line.me/${VITE_LIFF_ID}/share`
                       },
                       "style": "link",
                       "height": "md",
@@ -165,13 +168,13 @@ const ScrollActionGame = () => {
                   "contents": [
                     {
                       "type": "image",
-                      "url": "https://tominaga-tora.github.io/line-mini-app/jump-mini-app-icon.png",
+                      "url": `${mainImage}`,
                       "flex": 1,
                       "gravity": "center"
                     },
                     {
                       "type": "text",
-                      "text": "障害物ジャンプゲーム",
+                      "text": "ブロック回避ゲーム",
                       "flex": 19,
                       "size": "xs",
                       "color": "#999999",
@@ -188,7 +191,7 @@ const ScrollActionGame = () => {
                       "action": {
                         "type": "uri",
                         "label": "action",
-                        "uri": `https://miniapp.line.me/${liff.id}`
+                        "uri": `https://miniapp.line.me/${VITE_LIFF_ID}`
                       }
                     }
                   ],
