@@ -17,6 +17,8 @@ const ScrollActionGame = () => {
   const [gameState, setGameState] = useState('start');
   // LIFFブラウザ内かどうかを判定するグローバル状態を取得
   const [isLiffBrowser] = useAtom(isLiffBrowserAtom);
+  // シェアやエラーのメッセージを管理するuseState
+  const [message, setMessage] = useState("");
 
   // ゲームの設定（キャンバスサイズ、プレイヤーサイズ、障害物サイズ、重力など）
   const config = {
@@ -63,6 +65,7 @@ const ScrollActionGame = () => {
     };
     setScore(0); // スコアをリセット
     setGameState('playing'); // ゲーム状態を「playing」に設定
+    setMessage(""); // メッセージをリセット
   };
 
   // スコアをLINEでシェアする機能
@@ -98,15 +101,17 @@ const ScrollActionGame = () => {
             }
           }
         }
-      ]).then(function (res) {
-        if (res) {
-          alert("シェアしました！");
-        } else {
-          alert("シェアをキャンセルしました。");
-        }
-      }).catch(function (error) {
-        alert("エラーが発生しました。");
-      });
+      ])
+        .then((res) => {
+          if (res) {
+            setMessage("シェアしました！");
+          } else {
+            setMessage("シェアをキャンセルしました。");
+          }
+        })
+        .catch(() => {
+          setMessage("エラーが発生しました。");
+        });
     }
   };
 
@@ -312,13 +317,40 @@ const ScrollActionGame = () => {
           }}
         />
 
+        {/* メッセージ表示 */}
+        {message && (
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '10px',
+              width: '100%',
+              textAlign: 'center',
+              color: '#fff',
+              background: 'rgba(0,0,0,0.5)',
+              padding: '5px'
+            }}
+          >
+            {message}
+          </div>
+        )}
+
         {/* ゲーム開始画面 */}
         {gameState === 'start' && (
-          <div style={{
-            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
-            color: '#fff', textAlign: 'center'
-          }}>
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: '#fff',
+              textAlign: 'center'
+            }}
+          >
             <h2 className="text-xl mb-2" style={{ color: '#fff' }}>タップで2段ジャンプ！障害物を避けて高スコアを目指せ！</h2>
             <Button onClick={resetGame}>ゲーム開始</Button>
           </div>
@@ -326,14 +358,25 @@ const ScrollActionGame = () => {
 
         {/* ゲームオーバー画面 */}
         {gameState === 'gameOver' && (
-          <div style={{
-            position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
-            color: '#fff', textAlign: 'center', background: 'rgba(0,0,0,0.5)'
-          }}>
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: '#fff',
+              textAlign: 'center',
+              background: 'rgba(0,0,0,0.5)'
+            }}
+          >
             <h2 className="text-xl mb-2" style={{ color: '#fff' }}>ゲームオーバー！スコア: {score}</h2>
             <Button onClick={resetGame}>もう一度プレイ</Button>
-            {isLiffBrowser && ( 
+            {isLiffBrowser && (
               <Button className="mt-2" onClick={handleShare}>シェア！</Button>
             )}
           </div>
