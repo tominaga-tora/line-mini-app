@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_URL: /${{ github.event.repository.name }}/
-          VITE_LIFF_ID: ${{ secrets.LIFF_ID }} # secretsからLIFF_IDを取得する
+          VITE_LIFF_ID: ${{ secrets.VITE_LIFF_ID }} # secretsからLIFF_IDを取得する
 
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
