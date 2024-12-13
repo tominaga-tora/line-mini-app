@@ -36,7 +36,7 @@ jobs:
         env:
           VITE_BASE_URL: /${{ github.event.repository.name }}/
           VITE_LIFF_ID: ${{ secrets.VITE_LIFF_ID }} # secretsからLIFF_IDを取得する
-
+          VITE_PUBLIC_URL: ${{ secrets.VITE_PUBLIC_URL }}
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
         with:
