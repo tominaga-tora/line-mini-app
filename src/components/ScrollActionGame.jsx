@@ -402,8 +402,8 @@ const ScrollActionGame = () => {
       onClick={handleTap}
     >
       {/* 音声ファイル */}
-      <audio ref={jumpSoundRef} src="/se_jump_001.wav" />
-      <audio ref={gameOverSoundRef} src="/se_powerdown_001.wav" />
+      <audio ref={jumpSoundRef} src={`${env.VITE_PUBLIC_URL}/se_jump_001.wav`} preload="auto" />
+      <audio ref={gameOverSoundRef} src={`${env.VITE_PUBLIC_URL}/se_powerdown_001.wav`} preload="auto" />
 
       {/* キャンバスとUI */}
       <div style={{ position: 'relative', width: canvasSize.width, height: canvasSize.height }}>
